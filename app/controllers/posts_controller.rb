@@ -19,6 +19,29 @@ class PostsController < ApplicationController
   def edit
   end
 
+  def update_checked
+    @post = Post.find(params[:id])
+    @post.update(published: post_params[:published] == "1")
+    # binding.pry
+
+    respond_to do |format|
+      # Simple (better) way
+      # format.turbo_stream { render turbo_stream: turbo_stream.update(@post) }
+
+      # Targeted to only update the individual checkbox form instead of the entire _post.html.erb partial
+      # But the whole partial still has to go over the wire so it's not any more bandwidth efficient unless
+      # you break out the checkbox into it's own partial
+      format.turbo_stream { render turbo_stream:
+                              turbo_stream.update(:post,
+                                                partial: "posts/post",
+                                                target: "post_#{@post.id}_published",
+                                                locals: { post: @post }) }
+
+      format.html { redirect_to posts_path, notice: "Post updated successfully" }
+      format.json { render json: { success: true, published: @post.published } }
+    end
+  end
+
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)

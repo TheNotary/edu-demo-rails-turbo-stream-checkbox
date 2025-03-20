@@ -9,9 +9,13 @@
     <%= post.body %>
   </p>
 
-  <p>
-    <strong>Published:</strong>
-    <%= post.published %>
-  </p>
+  <turbo-frame id="#{dom_id(post)}_published" class="published">
+    <%= form_with(model: post, url: update_checked_post_path(post) ) do |form| %>
+      <p>
+        <%= form.label    :published, for: "#{dom_id(post)}_published" %>
+        <%= form.checkbox :published,  id: "#{dom_id(post)}_published", onchange: "this.form.requestSubmit()"  %>
+      </p>
+    <% end %>
+  </turbo-frame>
 
 </div>

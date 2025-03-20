@@ -1,0 +1,7 @@
+turbo-frame.published form[aria-busy="true"] {
+  input[type="checkbox"],
+  label {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
