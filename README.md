@@ -153,5 +153,7 @@ As an exercise to the reader, you may enjoy refactoring the checkbox into it's o
 
 
 ## Reference
+- [best documentation on turbo, imho](https://www.hotrails.dev/turbo-rails/turbo-frames-and-turbo-streams)
 - [Streaming from HTTP Responses](https://turbo.hotwired.dev/handbook/streams#streaming-from-http-responses)
 - [On Submit Behavior](https://github.com/hotwired/turbo/pull/386)
+
